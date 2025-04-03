@@ -1,0 +1,37 @@
+services:
+    database:
+        command: mysqld --character-set-filesystem=utf8 --character-set-server=utf8 --collation-server=utf8_general_ci --max_allowed_packet=32M
+        container_name: liferay-devcontainer-workspace-database
+        env_file: database.env
+        healthcheck:
+            interval: 5s
+            retries: 10
+            start_period: 5s
+            test: mysql --execute="select 1" --host=localhost --password=$$MYSQL_ROOT_PASSWORD --protocol=tcp --user=root 2>&1 | grep -qvF "Can't connect"
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+    devcontainer:
+        command: sleep infinity
+        container_name: liferay-devcontainer-workspace-devcontainer
+        image: mcr.microsoft.com/vscode/devcontainers/java:8
+        user: "1000:1000"
+        volumes:
+            - ../..:/workspaces:cached
+            - shared-data:/opt/liferay/deploy
+    liferay:
+        container_name: liferay-devcontainer-workspace-liferay
+        depends_on:
+            database:
+                condition: service_healthy
+        env_file: liferay.env
+        image: liferay/dxp:2024.q2.6
+        ports:
+            - 8000:8000
+            - 8080:8080
+        volumes:
+            - liferay-data:/opt/liferay/data
+            - shared-data:/opt/liferay/deploy
+volumes:
+    liferay-data:
+    shared-data:

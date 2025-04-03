@@ -1,0 +1,23 @@
+{
+	"containerUser": "liferay",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"dev.containers.dockerPath": "/home/me/.local/bin/podman-compose-wrapper.sh"
+			},
+			"extensions": [
+				"vscjava.vscode-java-pack"
+			]
+		}
+	},
+	"features": {
+		"./generator-liferay-theme": {},
+		"./liferay-blade-cli": {},
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "lts"
+		}
+	},
+	"image": "liferay/dxp:latest",
+	"name": "Liferay Workspace",
+	"remoteUser": "liferay"
+}

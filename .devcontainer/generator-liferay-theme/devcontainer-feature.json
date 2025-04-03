@@ -1,0 +1,10 @@
+{
+	"description": "Install [Liferay Theme Generator](https://learn.liferay.com/w/dxp/liferay-development/customizing-liferays-look-and-feel/themes/setting-up-an-environment-and-creating-a-theme)",
+	"id": "generator-liferay-theme",
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/features/node"
+	],
+	"name": "generator-liferay-theme",
+	"version": "1.0.0"
+}
