@@ -1,21 +1,21 @@
 {
 	"customizations": {
 		"vscode": {
-			"settings": {
-				"dev.containers.dockerPath": "/home/me/.local/bin/podman-compose-wrapper.sh"
-			},
 			"extensions": [
 				"vscjava.vscode-java-pack"
-			]
+			],
+			"settings": {
+				"dev.containers.dockerPath": "/home/me/.local/bin/podman-compose-wrapper.sh"
+			}
 		}
 	},
 	"dockerComposeFile": "docker-compose.yml",
 	"features": {
-		"./generator-liferay-theme": {},
-		"./liferay-blade-cli": {},
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "lts"
-		}
+		},
+		"ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
+		"ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
 	},
 	"name": "Liferay Workspace",
 	"service": "devcontainer",
