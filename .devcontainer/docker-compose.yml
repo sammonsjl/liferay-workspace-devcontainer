@@ -29,6 +29,7 @@ services:
         ports:
             - 8000:8000
             - 8080:8080
+        user: root
         volumes:
             - liferay-data:/opt/liferay/data
             - shared-data:/opt/liferay/deploy
