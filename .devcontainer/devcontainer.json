@@ -3,14 +3,12 @@
 		"vscode": {
 			"extensions": [
 				"vscjava.vscode-java-pack"
-			],
-			"settings": {
-				"dev.containers.dockerPath": "/home/me/.local/bin/podman-compose-wrapper.sh"
-			}
+			]
 		}
 	},
 	"dockerComposeFile": "docker-compose.yml",
 	"features": {
+		"ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {},
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "lts"
 		},
