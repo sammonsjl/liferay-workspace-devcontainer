@@ -18,6 +18,7 @@
 		"ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
 	},
 	"name": "Liferay Workspace",
+	"remoteUser": "root",
 	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
