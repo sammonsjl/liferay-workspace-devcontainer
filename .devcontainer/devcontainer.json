@@ -15,8 +15,16 @@
 		"ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
 		"ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
 	},
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh/known_hosts,target=/root/.ssh/known_hosts,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/.devcontainer/install.sh,target=/root/install.sh,type=bind,consistency=cached"
+	],
 	"name": "Liferay Workspace",
+	"postCreateCommand": "/root/install.sh",
 	"remoteUser": "root",
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
 	"service": "devcontainer",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/liferay"
 }
