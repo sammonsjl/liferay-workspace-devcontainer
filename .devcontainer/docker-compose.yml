@@ -1,6 +1,7 @@
 services:
     database:
         command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --innodb_buffer_pool_size=2GB --innodb_log_file_size=1G --skip-log-bin --innodb_flush_log_at_trx_commit=0 --innodb_io_capacity=700 --innodb_io_capacity_max=1500 --max_allowed_packet=1G --innodb_doublewrite=0
+        container_name: liferay-devcontainer-database-74x
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
             MYSQL_DATABASE: lportal
@@ -16,13 +17,14 @@ services:
             -   database-data:/var/lib/mysql
     devcontainer:
         command: sleep infinity
-        container_name: liferay-devcontainer-workspace-devcontainer
-        image: mcr.microsoft.com/vscode/devcontainers/java:8
+        container_name: liferay-devcontainer-workspace-74x
+        image: mcr.microsoft.com/vscode/devcontainers/java:21
         volumes:
             -   ../..:/workspaces:cached
             -   shared-data:/opt/liferay/deploy
     liferay:
         build: liferay
+        container_name: liferay-devcontainer-liferay-74x
         depends_on:
             database:
                 condition: service_healthy
@@ -40,7 +42,7 @@ services:
             -   127.0.0.1:8080:8080
             -   127.0.0.1:8000:8000 # Expose port for debugging
         volumes:
-            -   ../../../data:/docker-entrypoint-initlr.d
+            -   ../../data:/docker-entrypoint-initlr.d
             -   liferay-data:/opt/liferay/data
             -   shared-data:/opt/liferay/deploy
 volumes:
