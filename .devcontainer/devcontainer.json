@@ -31,7 +31,7 @@
     "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
   },
   "mounts": [
-    "source=${localEnv:HOME}/.ssh/known_hosts,target=//.ssh/known_hosts,type=bind,consistency=cached"
+    "source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached"
   ],
   "name": "Liferay Workspace",
   "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
