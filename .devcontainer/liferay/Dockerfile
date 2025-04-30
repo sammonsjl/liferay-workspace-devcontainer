@@ -9,3 +9,5 @@ RUN apt-get update -y && apt-get install -y mysql-client
 ADD override /mnt/liferay
 
 RUN chown -R liferay:liferay /mnt/liferay
+
+USER liferay

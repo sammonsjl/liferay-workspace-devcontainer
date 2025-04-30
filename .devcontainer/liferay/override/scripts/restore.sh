@@ -29,4 +29,5 @@ if [[ ! -f "$LIFERAY_HOME/data/.backup-restored" ]]; then
 	restore
 fi
 
-cp /docker-entrypoint-initlr.d/deploy/* /opt/liferay/deploy/
+#rm -fr /opt/liferay/data/license
+#cp /docker-entrypoint-initlr.d/deploy/* /opt/liferay/deploy/

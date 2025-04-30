@@ -1,30 +1,43 @@
 {
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"vscjava.vscode-java-pack"
-			]
-		}
-	},
-	"dockerComposeFile": "docker-compose.yml",
-	"features": {
-		"ghcr.io/devcontainers-extra/features/neovim-apt-get:1": {},
-		"ghcr.io/devcontainers/features/node:1": {
-			"version": "lts"
-		},
-		"ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
-		"ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
-	},
-	"mounts": [
-		"source=${localEnv:HOME}/.ssh/known_hosts,target=/root/.ssh/known_hosts,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/.devcontainer/install.sh,target=/root/install.sh,type=bind,consistency=cached"
-	],
-	"name": "Liferay Workspace",
-	"postCreateCommand": "/root/install.sh",
-	"remoteUser": "root",
-	"remoteEnv": {
-		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-	},
-	"service": "devcontainer",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/liferay"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "features": {
+    "ghcr.io/devcontainers-extra/features/direnv:1": {},
+    "ghcr.io/devcontainers-extra/features/starship:1": {},
+    "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
+      "omzPlugins": "https://github.com/chrissicool/zsh-256color.git https://github.com/zsh-users/zsh-autosuggestions.git https://github.com/zsh-users/zsh-syntax-highlighting.git",
+      "plugins": "git zsh-256color zsh-autosuggestions zsh-syntax-highlighting"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installOhMyZsh": true,
+      "installZsh": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {
+      "version": "stable"
+    },
+    "ghcr.io/duduribeiro/devcontainer-features/tmux:1": {},
+    "ghcr.io/georgofenbeck/features/lazygit-linuxbinary:1": {},
+    "ghcr.io/kreemer/features/stow:1": {},
+    "ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
+    "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh/known_hosts,target=//.ssh/known_hosts,type=bind,consistency=cached"
+  ],
+  "name": "Liferay Workspace",
+  "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }

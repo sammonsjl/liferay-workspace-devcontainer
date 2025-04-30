@@ -1,51 +1,51 @@
 services:
-    database:
-        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --innodb_buffer_pool_size=2GB --innodb_log_file_size=1G --skip-log-bin --innodb_flush_log_at_trx_commit=0 --innodb_io_capacity=700 --innodb_io_capacity_max=1500 --max_allowed_packet=1G --innodb_doublewrite=0
-        container_name: liferay-devcontainer-database-74x
-        environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-            MYSQL_DATABASE: lportal
-        healthcheck:
-            interval: 5s
-            retries: 10
-            start_period: 5s
-            test: mysql -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --protocol tcp -e 'select 1' 2>&1 | grep -qvF "Can't connect"
-        image: mysql:8.0
-        ports:
-            -   127.0.0.1:3306:3306
-        volumes:
-            -   database-data:/var/lib/mysql
-    devcontainer:
-        command: sleep infinity
-        container_name: liferay-devcontainer-workspace-74x
-        image: mcr.microsoft.com/vscode/devcontainers/java:21
-        volumes:
-            -   ../..:/workspaces:cached
-            -   shared-data:/opt/liferay/deploy
-    liferay:
-        build: liferay
-        container_name: liferay-devcontainer-liferay-74x
-        depends_on:
-            database:
-                condition: service_healthy
-        environment:
-            -   GLOWROOT_ENABLED=false
-            -   LIFERAY_DISABLE_TRIAL_LICENSE=true
-            -   LIFERAY_JPDA_ENABLED=true
-            -   LIFERAY_DATABASE_NAME=lportal
-            -   LIFERAY_DATABASE_USER=root
-            -   LIFERAY_DATABASE_PASSWORD=
-            -   LIFERAY_JVM_OPTS=-Xmx4096m -Xms4096m
-            -   LIFERAY_ROUTES_DXP=/opt/liferay/routes/liferay.com/dxp
-            -   LIFERAY_ROUTES_CLIENT_EXTENSION=/opt/liferay/routes/liferay.com/liferay-learn-site-initializer
-        ports:
-            -   127.0.0.1:8080:8080
-            -   127.0.0.1:8000:8000 # Expose port for debugging
-        volumes:
-            -   ../../data:/docker-entrypoint-initlr.d
-            -   liferay-data:/opt/liferay/data
-            -   shared-data:/opt/liferay/deploy
+  database:
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci --innodb_buffer_pool_size=2GB --innodb_log_file_size=1G --skip-log-bin --innodb_flush_log_at_trx_commit=0 --innodb_io_capacity=700 --innodb_io_capacity_max=1500 --max_allowed_packet=1G --innodb_doublewrite=0
+    container_name: liferay-database
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: lportal
+    healthcheck:
+      interval: 5s
+      retries: 10
+      start_period: 5s
+      test: mysql -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --protocol tcp -e 'select 1' 2>&1 | grep -qvF "Can't connect"
+    image: mysql:8.0
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - database-data:/var/lib/mysql
+  devcontainer:
+    command: sleep infinity
+    container_name: liferay-workspace
+    image: mcr.microsoft.com/vscode/devcontainers/java:21
+    volumes:
+      - ../..:/workspaces:cached
+      - shared-data:/opt/liferay/deploy
+  liferay:
+    build: liferay
+    container_name: liferay-liferay
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - GLOWROOT_ENABLED=false
+      - LIFERAY_DISABLE_TRIAL_LICENSE=true
+      - LIFERAY_JPDA_ENABLED=true
+      - LIFERAY_DATABASE_NAME=lportal
+      - LIFERAY_DATABASE_USER=root
+      - LIFERAY_DATABASE_PASSWORD=
+      - LIFERAY_JVM_OPTS=-Xmx4096m -Xms4096m
+      - LIFERAY_ROUTES_DXP=/opt/liferay/routes/liferay.com/dxp
+      - LIFERAY_ROUTES_CLIENT_EXTENSION=/opt/liferay/routes/liferay.com/liferay-learn-site-initializer
+    ports:
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:8000:8000 # Expose port for debugging
+    volumes:
+      - ../data:/docker-entrypoint-initlr.d
+      - liferay-data:/opt/liferay/data
+      - shared-data:/opt/liferay/deploy
 volumes:
-    database-data:
-    liferay-data:
-    shared-data:
+  database-data:
+  liferay-data:
+  shared-data:
