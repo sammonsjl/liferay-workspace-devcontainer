@@ -20,7 +20,7 @@ services:
     command: sleep infinity
     container_name: ${LOCAL_WORKSPACE_FOLDER}-workspace
     env_file: .env
-    image: mcr.microsoft.com/vscode/devcontainers/java:21
+    image: mcr.microsoft.com/vscode/devcontainers/javascript-node:20
     volumes:
       - ../:/workspaces/${LOCAL_WORKSPACE_FOLDER}:cached
       - shared-data:/opt/liferay/deploy
