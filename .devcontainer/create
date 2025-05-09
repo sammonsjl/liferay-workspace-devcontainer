@@ -1,9 +1,0 @@
-#!/bin/bash
-
-sudo chsh -s /usr/bin/zsh vscode
-
-curl -L https://raw.githubusercontent.com/liferay/liferay-blade-cli/master/cli/installers/local | sh
-
-
-npm install -g yo@4.x.x gulp generator-liferay-theme@10
-

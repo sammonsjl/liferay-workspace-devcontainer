@@ -10,17 +10,21 @@
   "features": {
     "ghcr.io/devcontainers/features/nix:1": {
       "multiUser": false,
-      "packages": "jdk21, lazygit, neovim, starship, tmux",
+      "packages": "lazygit, neovim, starship, tmux",
       "useAttributePath": true,
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
     },
     "ghcr.io/kreemer/features/stow:1": {},
     "ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
     "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1.0.2": {}
   },
-  "initializeCommand": "echo LOCAL_WORKSPACE_FOLDER=${localWorkspaceFolderBasename} > .devcontainer/.env && .devcontainer/init",
+  "initializeCommand": "echo LOCAL_WORKSPACE_FOLDER=${localWorkspaceFolderBasename} > .devcontainer/.env",
   "name": "Liferay Workspace",
   "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
+  "postCreateCommand": "blade gw clean deploy",
   "remoteEnv": {
     "LANG": "en_US.UTF-8"
   },
