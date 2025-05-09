@@ -8,36 +8,27 @@
   },
   "dockerComposeFile": "docker-compose.yml",
   "features": {
-    "ghcr.io/devcontainers-extra/features/direnv:1": {},
-    "ghcr.io/devcontainers-extra/features/starship:1": {},
-    "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
-      "omzPlugins": "https://github.com/chrissicool/zsh-256color.git https://github.com/zsh-users/zsh-autosuggestions.git https://github.com/zsh-users/zsh-syntax-highlighting.git",
-      "plugins": "git zsh-256color zsh-autosuggestions zsh-syntax-highlighting"
-    },
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installOhMyZsh": true,
-      "installZsh": true
+    "ghcr.io/devcontainers/features/nix:1": {
+      "multiUser": false,
+      "packages": "lazygit, neovim, nodejs_22, starship, tmux",
+      "useAttributePath": true,
+      "version": "latest"
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     },
-    "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {
-      "version": "stable"
-    },
-    "ghcr.io/duduribeiro/devcontainer-features/tmux:1": {},
-    "ghcr.io/georgofenbeck/features/lazygit-linuxbinary:1": {},
-    "ghcr.io/kreemer/features/stow:1": {},
-    "ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
-    "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1": {}
+    "ghcr.io/kreemer/features/stow:1": {}
   },
+  "initializeCommand": "echo LOCAL_WORKSPACE_FOLDER=${localWorkspaceFolderBasename} > .devcontainer/.env && .devcontainer/init",
   "mounts": [
-    "source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder}/.devcontainer/create,target=/home/vscode/create,type=bind,consistency=cached"
   ],
   "name": "Liferay Workspace",
-  "onCreateCommand": "sudo chsh -s /usr/bin/zsh $USER",
+  "postCreateCommand": "/home/vscode/create",
   "remoteEnv": {
-    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    "LANG": "en_US.UTF-8"
   },
+  "remoteUser": "vscode",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
