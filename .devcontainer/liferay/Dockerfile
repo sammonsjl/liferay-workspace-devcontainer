@@ -1,4 +1,4 @@
-FROM liferay/dxp:latest
+FROM liferay/dxp:2025.q1.11-lts
 
 USER root
 

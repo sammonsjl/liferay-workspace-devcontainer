@@ -34,7 +34,6 @@ services:
         condition: service_healthy
     environment:
       - GLOWROOT_ENABLED=true
-      - LIFERAY_DISABLE_TRIAL_LICENSE=true
       - LIFERAY_JPDA_ENABLED=true
       - LIFERAY_DATABASE_NAME=lportal
       - LIFERAY_DATABASE_USER=root

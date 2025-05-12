@@ -19,7 +19,7 @@
     },
     "ghcr.io/kreemer/features/stow:1": {},
     "ghcr.io/sammonsjl/devcontainer-features/generator-liferay-theme:1": {},
-    "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1.0.2": {}
+    "ghcr.io/sammonsjl/devcontainer-features/liferay-blade-cli:1.0.0": {}
   },
   "initializeCommand": "echo LOCAL_WORKSPACE_FOLDER=${localWorkspaceFolderBasename} > .devcontainer/.env",
   "name": "Liferay Workspace",
