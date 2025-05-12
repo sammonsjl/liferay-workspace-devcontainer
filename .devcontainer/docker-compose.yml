@@ -24,6 +24,7 @@ services:
     volumes:
       - ../:/workspaces/${LOCAL_WORKSPACE_FOLDER}:cached
       - shared-data:/opt/liferay/deploy
+      - shared-data:/opt/liferay/osgi/client-extensions
   liferay:
     build: liferay
     container_name: ${LOCAL_WORKSPACE_FOLDER}-liferay
@@ -33,6 +34,7 @@ services:
         condition: service_healthy
     environment:
       - GLOWROOT_ENABLED=true
+      - LIFERAY_DISABLE_TRIAL_LICENSE=true
       - LIFERAY_JPDA_ENABLED=true
       - LIFERAY_DATABASE_NAME=lportal
       - LIFERAY_DATABASE_USER=root
@@ -45,6 +47,7 @@ services:
       - ../data:/docker-entrypoint-initlr.d
       - liferay-data:/opt/liferay/data
       - shared-data:/opt/liferay/deploy
+      - shared-data:/opt/liferay/osgi/client-extensions
 volumes:
   database-data:
   liferay-data:
