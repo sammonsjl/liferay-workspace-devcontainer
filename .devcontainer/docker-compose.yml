@@ -24,7 +24,7 @@ services:
     volumes:
       - ../:/workspaces/${LOCAL_WORKSPACE_FOLDER}:cached
       - shared-data:/opt/liferay/deploy
-      - shared-data:/opt/liferay/osgi
+      - shared-data:/opt/liferay/osgi/client-extenions
   liferay:
     build: ../build/docker
     container_name: ${LOCAL_WORKSPACE_FOLDER}-liferay
@@ -43,10 +43,10 @@ services:
       - 127.0.0.1:8080:8080
       - 127.0.0.1:8000:8000 # Expose port for debugging
     volumes:
-      - ../data:/docker-entrypoint-initlr.d
+      - ../../data:/docker-entrypoint-initlr.d
       - liferay-data:/opt/liferay/data
-      - shared-data:/opt/liferay/deploy
-      - shared-data:/opt/liferay/osgi
+      - shared-data:/opt/liferay/osgi/client-extenions
+      - shared-data:/mnt/liferay/deploy
 volumes:
   database-data:
   liferay-data:
