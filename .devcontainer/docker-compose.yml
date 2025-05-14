@@ -20,13 +20,13 @@ services:
     command: sleep infinity
     container_name: ${LOCAL_WORKSPACE_FOLDER}-workspace
     env_file: .env
-    image: mcr.microsoft.com/vscode/devcontainers/java:21
+    image: "mcr.microsoft.com/devcontainers/base:debian"
     volumes:
       - ../:/workspaces/${LOCAL_WORKSPACE_FOLDER}:cached
       - shared-data:/opt/liferay/deploy
       - shared-data:/opt/liferay/osgi/client-extensions
   liferay:
-    build: liferay
+    build: ../build/docker
     container_name: ${LOCAL_WORKSPACE_FOLDER}-liferay
     env_file: .env
     depends_on:
