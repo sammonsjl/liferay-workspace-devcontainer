@@ -10,22 +10,23 @@
   "features": {
     "ghcr.io/devcontainers/features/nix:1": {
       "multiUser": false,
-      "packages": "jdk21, lazygit, nodejs, neovim, starship, stow, tmux",
+      "packages": "fzf, jdk21, lazygit, nodejs, neovim, ripgrep, starship, stow, tmux",
       "useAttributePath": true,
       "version": "latest"
     }
   },
   "initializeCommand": "echo LOCAL_WORKSPACE_FOLDER=${localWorkspaceFolderBasename} > .devcontainer/.env && .devcontainer/init.sh",
   "mounts": [
-    "source=${localWorkspaceFolder}/.devcontainer/install.sh,target=/home/vscode/install.sh,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder}/.devcontainer/install.sh,target=/root/install.sh,type=bind,consistency=cached",
+    "type=bind,source=/home/${localEnv:USER}/.ssh,target=/root/.ssh,readonly"
   ],
   "name": "Liferay Workspace",
   "onCreateCommand": "$HOME/install.sh",
-  "postCreateCommand": "blade gw clean deploy",
   "remoteEnv": {
     "LANG": "en_US.UTF-8",
-    "PATH": "${containerEnv:PATH}:/home/vscode/jpm/bin:/home/vscode/.nix-profile/bin:/home/vscode/.npm-global/bin"
+    "PATH": "${containerEnv:PATH}:/root/jpm/bin:/home/vscode/.nix-profile/bin:/root/.npm-global/bin"
   },
+  "remoteUser": "root",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
