@@ -24,7 +24,7 @@ services:
     volumes:
       - ../:/workspaces/${LOCAL_WORKSPACE_FOLDER}:cached
       - shared-data:/opt/liferay/deploy
-      - shared-data:/opt/liferay/osgi/client-extenions
+      - shared-data:/opt/liferay/osgi/client-extensions
   liferay:
     build: ../build/docker
     container_name: ${LOCAL_WORKSPACE_FOLDER}-liferay
@@ -45,7 +45,7 @@ services:
     volumes:
       - ../../data:/docker-entrypoint-initlr.d
       - liferay-data:/opt/liferay/data
-      - shared-data:/opt/liferay/osgi/client-extenions
+      - shared-data:/opt/liferay/osgi/client-extensions
       - shared-data:/opt/liferay/deploy
 volumes:
   database-data:
